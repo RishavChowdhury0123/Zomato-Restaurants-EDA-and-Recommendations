@@ -135,6 +135,7 @@ def show_results(results):
                     st.text(str(row.aggregate_rating)+ '★')
                     st.text(str(row.votes)+' votes')
                     st.text('₹'+str(row.average_cost_for_two)+ ' for two')
+                    st.markdown("[ Open on Zomato ]({})".format(row.url), unsafe_allow_html=True)
             except:
                 contcol.empty()
 
