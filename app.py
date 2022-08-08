@@ -1,4 +1,5 @@
 # Prerequistes
+import nltk
 from ast import keyword
 from email import header
 from attr import has
@@ -6,11 +7,13 @@ import pandas as pd
 import numpy as np
 from requests import head
 import streamlit as st
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
 import warnings
 import joblib
 import re
+
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 st.set_page_config(page_title='Restaurant Finder', layout='wide')
 
