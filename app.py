@@ -1,4 +1,5 @@
 # Prerequistes
+import nltk
 from ast import keyword
 from email import header
 from attr import has
@@ -6,11 +7,13 @@ import pandas as pd
 import numpy as np
 from requests import head
 import streamlit as st
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
 import warnings
 import joblib
 import re
+
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 st.set_page_config(page_title='Restaurant Finder', layout='wide')
 
@@ -45,9 +48,9 @@ warnings.filterwarnings('ignore')
 # Function to load restaurants data, similarities and restaurant keywords
 @st.cache(allow_output_mutation=True, show_spinner=False)
 def load_data():
-    texts= joblib.load(r'C:\Users\DELL\Python files\Zomato in major cities\texts.sav')
-    similarities= joblib.load(r'C:\Users\DELL\Python files\Zomato in major cities\similarities.sav')
-    df= pd.read_csv(r'C:\Users\DELL\Python files\Zomato in major cities\cleaned_data.csv')
+    texts= joblib.load('texts.sav')
+    similarities= joblib.load('similarities.sav')
+    df= pd.read_csv('cleaned_data.csv')
     df.drop(['highlights','cuisine_count','hdi','hdi_category'], axis=1,inplace=True)
     df.cuisines= df.cuisines.apply(lambda x: re.sub("[\[\]']",'',x)).str.strip(' ').str.split(',')
     df.high= df.high.apply(lambda x: re.sub("[\[\]']",'',x)).str.strip(' ').str.split(',')
